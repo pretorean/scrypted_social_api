@@ -19,9 +19,7 @@ aqueduct db upgrade --connect postgres://dart:dart@localhost:5432/scrypted_socia
 To run your application locally, you must also register OAuth 2.0 clients in the application database. Use the same database credentials after you have applied the migration.
 
 ```
-aqueduct auth add-client --id com.local.test \
-    --secret mysecret \
-    --connect postgres://user:password@localhost:5432/scrypted_social_api
+aqueduct auth add-client --id client.version.alpha --secret ef3bc6dni5fdg8mkk4p1
 ```
 
 To run your tests with OAuth 2.0 client identifiers, see this documentation: http://aqueduct.io/docs/testing/mixins/#testing-applications-that-use-oauth-20.
