@@ -1,6 +1,7 @@
 import 'package:aqueduct/aqueduct.dart';
 import 'package:aqueduct/managed_auth.dart';
 import 'package:scrypted_social_api/controller/identity_controller.dart';
+import 'package:scrypted_social_api/controller/page_auth_controller.dart';
 import 'package:scrypted_social_api/controller/page_controller.dart';
 import 'package:scrypted_social_api/controller/register_controller.dart';
 import 'package:scrypted_social_api/controller/user_controller.dart';
@@ -73,10 +74,26 @@ class ScryptedSocialApiChannel extends ApplicationChannel
         .link(() => Authorizer.bearer(authServer))
         .link(() => UserController(context, authServer));
 
-    // страницы
+    // страницы просмотр
+    router.route("/page/[:pageId]").link(() => PageController(context));
+
+    // страницы создание
     router
-        .route("/page/[:pageId]")
-        .link(() => PageController(context, authServer));
+        .route("/newpage")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => PageAuthController(context));
+
+    // страницы редактирование
+    router
+        .route("/page/edit/:editPageId")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => PageAuthController(context));
+
+    // страницы удаление
+    router
+        .route("/page/delete/:deletePageId")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => PageAuthController(context));
 
     return router;
   }

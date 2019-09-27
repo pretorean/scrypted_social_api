@@ -1,6 +1,8 @@
 import 'package:aqueduct/aqueduct.dart';
 import 'package:aqueduct/managed_auth.dart';
+import 'package:scrypted_social_api/model/comment.dart';
 import 'package:scrypted_social_api/model/page.dart';
+import 'package:scrypted_social_api/model/rating_comment.dart';
 
 // тип прав в системе
 enum UserType { admin, user }
@@ -59,4 +61,7 @@ class _User extends ResourceOwnerTableDefinition {
   UserState state;
 
   ManagedSet<Page> pages;
+  ManagedSet<Comment> comments;
+  ManagedSet<RatingComment> ratingPages;
+  ManagedSet<RatingComment> ratingComments;
 }

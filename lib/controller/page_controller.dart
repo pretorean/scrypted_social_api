@@ -2,11 +2,9 @@ import 'package:aqueduct/aqueduct.dart';
 import 'package:scrypted_social_api/repository/page_repository.dart';
 
 class PageController extends ResourceController {
-  PageController(this.context, this.authServer)
-      : repository = PageRepository(context);
+  PageController(this.context) : repository = PageRepository(context);
 
   final ManagedContext context;
-  final AuthServer authServer;
   final PageRepository repository;
 
   @Operation.get()
