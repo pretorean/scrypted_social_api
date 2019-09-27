@@ -1,0 +1,5 @@
+username: pretorean
+password: "123456"
+host: localhost
+port: 5432
+databaseName: scrypted_social_api

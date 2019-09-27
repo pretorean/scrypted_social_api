@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres
+    hostname: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: pretorean
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - project
+
+  adminer:
+    image: adminer
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    networks:
+      - project
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./../scrypted_vigilante:/usr/share/nginx/html
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+
+networks:
+  project:
+    driver: bridge

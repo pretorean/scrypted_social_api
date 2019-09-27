@@ -12,3 +12,5 @@ Dart_Packages.xml
 .DS_Store
 .idea/
 *.aqueduct.pid
+postgres-data/*
+.dart_tool

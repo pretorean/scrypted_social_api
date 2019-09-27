@@ -1,6 +1,6 @@
 database:
- username: dart
- password: dart
- host: localhost
+ username: pretorean
+ password: "123456"
+ host: postgres
  port: 5432
- databaseName: dart_test
+ databaseName: scrypted_social_api
