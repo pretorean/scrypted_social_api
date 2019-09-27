@@ -1,5 +1,5 @@
-import '../model/user.dart';
-import '../scrypted_social_api.dart';
+import 'package:aqueduct/aqueduct.dart';
+import 'package:scrypted_social_api/model/user.dart';
 
 class IdentityController extends ResourceController {
   IdentityController(this.context);

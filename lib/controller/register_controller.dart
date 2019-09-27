@@ -1,5 +1,5 @@
-import '../model/user.dart';
-import '../scrypted_social_api.dart';
+import 'package:aqueduct/aqueduct.dart';
+import 'package:scrypted_social_api/model/user.dart';
 
 class RegisterController extends ResourceController {
   RegisterController(this.context, this.authServer);
@@ -35,9 +35,10 @@ class RegisterController extends ResourceController {
 
   @override
   Map<String, APIResponse> documentOperationResponses(
-    APIDocumentContext context, Operation operation) {
+      APIDocumentContext context, Operation operation) {
     return {
-      "200": APIResponse.schema("User successfully registered.", context.schema.getObject("UserRegistration")),
+      "200": APIResponse.schema("User successfully registered.",
+          context.schema.getObject("UserRegistration")),
       "400": APIResponse.schema("Error response", APISchemaObject.freeForm())
     };
   }
@@ -64,5 +65,4 @@ class RegisterController extends ResourceController {
       userRegistration.properties.addAll(userSchema.properties);
     });
   }
-
 }

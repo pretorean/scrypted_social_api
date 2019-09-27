@@ -1,9 +1,12 @@
-import 'controller/identity_controller.dart';
-import 'controller/register_controller.dart';
-import 'controller/user_controller.dart';
-import 'model/user.dart';
-import 'utility/html_template.dart';
-import 'scrypted_social_api.dart';
+import 'package:aqueduct/aqueduct.dart';
+import 'package:aqueduct/managed_auth.dart';
+import 'package:scrypted_social_api/controller/identity_controller.dart';
+import 'package:scrypted_social_api/controller/page_controller.dart';
+import 'package:scrypted_social_api/controller/register_controller.dart';
+import 'package:scrypted_social_api/controller/user_controller.dart';
+import 'package:scrypted_social_api/model/user.dart';
+import 'package:scrypted_social_api/scrypted_social_api.dart';
+import 'package:scrypted_social_api/utility/html_template.dart';
 
 /// This type initializes an application.
 ///
@@ -26,7 +29,8 @@ class ScryptedSocialApiChannel extends ApplicationChannel
     logger.onRecord.listen(
         (rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
 
-    final config = ScryptedSocialApiConfiguration(options.configurationFilePath);
+    final config =
+        ScryptedSocialApiConfiguration(options.configurationFilePath);
 
     context = contextWithConnectionInfo(config.database);
 
@@ -68,6 +72,11 @@ class ScryptedSocialApiChannel extends ApplicationChannel
         .route("/users/[:id]")
         .link(() => Authorizer.bearer(authServer))
         .link(() => UserController(context, authServer));
+
+    // страницы
+    router
+        .route("/page/[:pageId]")
+        .link(() => PageController(context, authServer));
 
     return router;
   }
@@ -114,7 +123,8 @@ class ScryptedSocialApiChannel extends ApplicationChannel
 /// For more documentation on configuration files, see
 /// https://pub.dartlang.org/packages/safe_config.
 class ScryptedSocialApiConfiguration extends Configuration {
-  ScryptedSocialApiConfiguration(String fileName) : super.fromFile(File(fileName));
+  ScryptedSocialApiConfiguration(String fileName)
+      : super.fromFile(File(fileName));
 
   DatabaseConfiguration database;
 }
