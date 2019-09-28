@@ -20,4 +20,25 @@ class VoteRepository {
     final p = await query.insert();
     return p != null ? 1 : 0;
   }
+
+  Future<int> _getPageVote(
+    int pageId,
+    int currentUserId,
+    int voteFilter,
+  ) async {
+    final query = Query<RatingPage>(context)
+      ..where((p) => p.page.id).equalTo(pageId)
+      ..where((p) => p.rating).equalTo(1);
+    final tmp = await query.reduce.count();
+    return tmp == null ? 0 : tmp;
+  }
+
+  Future<Map<String, int>> getPageVotes(
+    int pageId,
+    int currentUserId,
+  ) async =>
+      {
+        'up': await _getPageVote(pageId, currentUserId, 1),
+        'down': await _getPageVote(pageId, currentUserId, -1),
+      };
 }

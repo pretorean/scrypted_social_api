@@ -1,15 +1,28 @@
 import 'package:aqueduct/aqueduct.dart';
+import 'package:scrypted_social_api/model/page.dart';
+import 'package:scrypted_social_api/repository/answer/page_answer.dart';
 import 'package:scrypted_social_api/repository/page_repository.dart';
+import 'package:scrypted_social_api/repository/vote_repository.dart';
 
 class PageController extends ResourceController {
-  PageController(this.context) : repository = PageRepository(context);
+  PageController(this.context)
+      : repository = PageRepository(context),
+        voteRepository = VoteRepository(context);
 
   final ManagedContext context;
   final PageRepository repository;
+  final VoteRepository voteRepository;
 
   @Operation.get()
   Future<Response> getAll() async {
-    final products = await repository.getAll();
+    final List<Page> products = await repository.getAll();
+//    final List<PageAnswer> tmp = products.map(
+//      (p) {
+//        final map =
+//            voteRepository.getPageVotes(p.id, request.authorization.ownerID);
+//        return PageAnswer.fromPage(p, map);
+//      },
+//    ).toList();
     return Response.ok(products);
   }
 
@@ -21,55 +34,4 @@ class PageController extends ResourceController {
     else
       return Response.ok(product);
   }
-
-//  @Operation.post()
-//  Future<Response> createItem(
-//      {@Bind.header("companyId") int companyId,
-//      @Bind.body() Product product}) async {
-//    if (!checkRightsByCompanyId(companyId)) {
-//      return Response.forbidden();
-//    }
-//
-//    final tmpProduct = await repository.createProduct(companyId, product);
-//    return Response.ok(tmpProduct);
-//  }
-//
-//  @Operation.put("productId")
-//  Future<Response> updateItem(
-//      {@Bind.path("productId") int productId,
-//      @Bind.header("companyId") int companyId,
-//      @Bind.body() Product product}) async {
-//    if (!checkRightsByCompanyId(companyId)) {
-//      return Response.forbidden();
-//    }
-//
-//    final tmProduct =
-//        await repository.setProduct(companyId, productId, product);
-//    if (tmProduct == null)
-//      return Response.notFound();
-//    else
-//      return Response.ok(product);
-//  }
-//
-//  @Operation.delete("productId")
-//  Future<Response> deleteItem(
-//      {@Bind.path("productId") int productId,
-//      @Bind.header("companyId") int companyId}) async {
-//    if (!checkRightsByCompanyId(companyId)) {
-//      return Response.forbidden();
-//    }
-//
-//    final count = await repository.softDeleteProduct(companyId, productId);
-//    if (count == 0)
-//      return Response.notFound();
-//    else
-//      return Response.ok({"deleted": "$count"});
-//  }
-//
-//  bool checkRightsByCompanyId(int companyId) {
-//    if (companyId == null) {
-//      return false;
-//    }
-//    return true;
-//  }
 }

@@ -9,6 +9,7 @@ class PageRepository {
   Future<List<Page>> getAll() {
     final query = Query<Page>(context)
       ..where((p) => p.deleted).equalTo(false)
+      ..join(set: (p) => p.ratingPages)
       ..sortBy((p) => p.createDate, QuerySortOrder.descending);
     return query.fetch();
   }
