@@ -38,6 +38,8 @@ class ScryptedSocialApiChannel extends ApplicationChannel
 
     final authStorage = ManagedAuthDelegate<User>(context);
     authServer = AuthServer(authStorage);
+
+    CORSPolicy.defaultPolicy.allowedOrigins = ["*"];
   }
 
   /// Construct the request channel.
@@ -101,8 +103,6 @@ class ScryptedSocialApiChannel extends ApplicationChannel
         .route("/vote/:pageId/:vote")
         .link(() => Authorizer.bearer(authServer))
         .link(() => VotePageController(context));
-
-
 
     return router;
   }

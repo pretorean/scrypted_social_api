@@ -16,14 +16,20 @@ class PageController extends ResourceController {
   @Operation.get()
   Future<Response> getAll() async {
     final List<Page> products = await repository.getAll();
-//    final List<PageAnswer> tmp = products.map(
-//      (p) {
-//        final map =
-//            voteRepository.getPageVotes(p.id, request.authorization.ownerID);
-//        return PageAnswer.fromPage(p, map);
-//      },
-//    ).toList();
-    return Response.ok(products);
+    final tmp1 = products.map(
+      (p) async {
+        final map =
+            voteRepository.getPageVotes(p.id, request.authorization.ownerID);
+        return PageAnswer.fromPage(p, await map);
+      },
+    );
+
+    List<PageAnswer> tmp2;
+    for (var f in tmp1) {
+      tmp2.add(await f);
+    }
+
+    return Response.ok(tmp2);
   }
 
   @Operation.get("pageId")
