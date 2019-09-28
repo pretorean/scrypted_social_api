@@ -15,6 +15,16 @@ class VoteRepository {
   ) async {
     final tmpUser = User()..id = currentUserId;
     final tmpPage = Page()..id = pageId;
+
+    final checkQuery = Query<RatingPage>(context)
+      ..where((p) => p.user.id).equalTo(currentUserId)
+      ..where((p) => p.page.id).equalTo(pageId);
+    final count = await checkQuery.reduce.count();
+
+    if (count != null && count > 0) {
+      return 0;
+    }
+
     final RatingPage v = RatingPage()
       ..user = tmpUser
       ..page = tmpPage
