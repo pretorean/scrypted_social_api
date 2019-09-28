@@ -23,7 +23,7 @@ class PageController extends ResourceController {
       },
     );
 
-    List<PageAnswer> tmp2;
+    final List<PageAnswer> tmp2 = [];
     for (Future<PageAnswer> f in tmp1) {
       tmp2.add(await f);
     }
