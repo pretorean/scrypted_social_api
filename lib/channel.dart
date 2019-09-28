@@ -4,6 +4,7 @@ import 'package:scrypted_social_api/controller/identity_controller.dart';
 import 'package:scrypted_social_api/controller/page_auth_controller.dart';
 import 'package:scrypted_social_api/controller/page_controller.dart';
 import 'package:scrypted_social_api/controller/register_controller.dart';
+import 'package:scrypted_social_api/controller/user_auth_controller.dart';
 import 'package:scrypted_social_api/controller/user_controller.dart';
 import 'package:scrypted_social_api/controller/vote_page_controller.dart';
 import 'package:scrypted_social_api/model/user.dart';
@@ -75,7 +76,10 @@ class ScryptedSocialApiChannel extends ApplicationChannel
     router
         .route("/users/[:id]")
         .link(() => Authorizer.bearer(authServer))
-        .link(() => UserController(context, authServer));
+        .link(() => UserAuthController(context, authServer));
+
+    // запрос без авторизации
+    router.route("/user/:id").link(() => UserController(context, authServer));
 
     // страницы просмотр
     router.route("/page/[:pageId]").link(() => PageController(context));
