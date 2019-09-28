@@ -44,7 +44,7 @@ class PageAnswer extends Serializable {
         'user': user.asMap(),
         'title': title,
         'text': text,
-        'createDate': createDate,
+        'createDate': createDate.toString(),
         'type': type,
         'modified': modified,
         'rating': rating,
