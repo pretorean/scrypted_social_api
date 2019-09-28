@@ -41,7 +41,7 @@ class ScryptedSocialApiChannel extends ApplicationChannel
     authServer = AuthServer(authStorage);
 
     CORSPolicy.defaultPolicy.allowedOrigins = [
-      'XN--90ACIBPMTAD6AL5FSD.XN--P1AI',
+      'xn--90acibpmtad6al5fsd.xn--p1ai',
     ];
   }
 
