@@ -12,7 +12,7 @@ class Migration5 extends Migration {
             isIndexed: true,
             isNullable: false,
             isUnique: false),
-        unencodedInitialValue: '');
+        unencodedInitialValue: "''");
   }
 
   @override
