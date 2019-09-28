@@ -13,6 +13,7 @@ class PageAnswer extends Serializable {
     this.modified,
     this.deleted,
     this.rating,
+    this.titleImg,
   });
 
   PageAnswer.fromPage(
@@ -26,11 +27,13 @@ class PageAnswer extends Serializable {
         text = page.text,
         title = page.title,
         type = page.type,
-        user = page.user;
+        user = page.user,
+        titleImg = page.titleImg;
 
   final int id;
   final User user;
   final String title; // наименование
+  final String titleImg;
   final String text; // text
   final DateTime createDate; // дата создания
   final PageType type;
@@ -48,6 +51,7 @@ class PageAnswer extends Serializable {
         'type': type.toString(),
         'modified': modified?.toString(),
         'rating': rating,
+        'titleImg': titleImg,
       };
 
   @override
