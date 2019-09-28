@@ -1,7 +1,8 @@
+import 'package:aqueduct/aqueduct.dart';
 import 'package:scrypted_social_api/model/page.dart';
 import 'package:scrypted_social_api/model/user.dart';
 
-class PageAnswer {
+class PageAnswer extends Serializable {
   PageAnswer({
     this.id,
     this.user,
@@ -36,4 +37,19 @@ class PageAnswer {
   final bool modified; // признак редактирования
   final bool deleted;
   final Map<String, int> rating;
+
+  @override
+  Map<String, dynamic> asMap() => {
+        'id': id,
+        'user': user,
+        'title': title,
+        'text': text,
+        'createDate': createDate,
+        'type': type,
+        'modified': modified,
+        'rating': rating
+      };
+
+  @override
+  void readFromMap(Map<String, dynamic> object) {}
 }
