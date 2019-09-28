@@ -41,7 +41,7 @@ class VoteRepository {
   ) async {
     final query = Query<RatingPage>(context)
       ..where((p) => p.page.id).equalTo(pageId)
-      ..where((p) => p.rating).equalTo(1);
+      ..where((p) => p.rating).equalTo(voteFilter);
     final tmp = await query.reduce.count();
     return tmp == null ? 0 : tmp;
   }
