@@ -60,6 +60,9 @@ class _User extends ResourceOwnerTableDefinition {
   @Column(omitByDefault: true, indexed: true, defaultValue: "'active'")
   UserState state;
 
+  @Column(indexed: true, nullable: true)
+  String links;
+
   ManagedSet<Page> pages;
   ManagedSet<Comment> comments;
   ManagedSet<RatingComment> ratingPages;

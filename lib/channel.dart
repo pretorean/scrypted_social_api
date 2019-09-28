@@ -5,6 +5,7 @@ import 'package:scrypted_social_api/controller/page_auth_controller.dart';
 import 'package:scrypted_social_api/controller/page_controller.dart';
 import 'package:scrypted_social_api/controller/register_controller.dart';
 import 'package:scrypted_social_api/controller/user_controller.dart';
+import 'package:scrypted_social_api/controller/vote_page_controller.dart';
 import 'package:scrypted_social_api/model/user.dart';
 import 'package:scrypted_social_api/scrypted_social_api.dart';
 import 'package:scrypted_social_api/utility/html_template.dart';
@@ -94,6 +95,14 @@ class ScryptedSocialApiChannel extends ApplicationChannel
         .route("/page/delete/:deletePageId")
         .link(() => Authorizer.bearer(authServer))
         .link(() => PageAuthController(context));
+
+    // голоса страниц
+    router
+        .route("/vote/:pageId/:vote")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => VotePageController(context));
+
+
 
     return router;
   }

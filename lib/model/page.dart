@@ -20,7 +20,7 @@ class _Page {
   @Column(indexed: true)
   String title; // наименование
 
-  @Column(indexed: true)
+  @Column(indexed: false)
   String text; // text
 
   @Column(indexed: true)

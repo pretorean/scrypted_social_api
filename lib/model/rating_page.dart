@@ -17,9 +17,6 @@ class _RatingPage {
   Page page;
 
   @Column(indexed: true)
-  String text; // text
-
-  @Column(indexed: true)
   int rating; // рейтинг
 
   @Column(indexed: true)
