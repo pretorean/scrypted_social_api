@@ -45,8 +45,8 @@ class PageAnswer extends Serializable {
         'title': title,
         'text': text,
         'createDate': createDate.toString(),
-        'type': type,
-        'modified': modified,
+        'type': type.toString(),
+        'modified': modified?.toString(),
         'rating': rating,
       };
 
