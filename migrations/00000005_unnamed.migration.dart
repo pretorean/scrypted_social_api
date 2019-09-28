@@ -11,7 +11,8 @@ class Migration5 extends Migration {
             autoincrement: false,
             isIndexed: true,
             isNullable: false,
-            isUnique: false));
+            isUnique: false),
+        unencodedInitialValue: '');
   }
 
   @override
