@@ -23,7 +23,6 @@ class VoteRepository {
 
   Future<int> _getPageVote(
     int pageId,
-    int currentUserId,
     int voteFilter,
   ) async {
     final query = Query<RatingPage>(context)
@@ -35,10 +34,9 @@ class VoteRepository {
 
   Future<Map<String, int>> getPageVotes(
     int pageId,
-    int currentUserId,
   ) async =>
       {
-        'up': await _getPageVote(pageId, currentUserId, 1),
-        'down': await _getPageVote(pageId, currentUserId, -1),
+        'up': await _getPageVote(pageId, 1),
+        'down': await _getPageVote(pageId, -1),
       };
 }

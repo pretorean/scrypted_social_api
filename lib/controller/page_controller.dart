@@ -18,8 +18,7 @@ class PageController extends ResourceController {
     final List<Page> products = await repository.getAll();
     final tmp1 = products.map(
       (p) async {
-        final map =
-            voteRepository.getPageVotes(p.id, request.authorization.ownerID);
+        final map = voteRepository.getPageVotes(p.id);
         return PageAnswer.fromPage(p, await map);
       },
     );
