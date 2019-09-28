@@ -1,5 +1,7 @@
 import 'package:aqueduct/aqueduct.dart';
+import 'package:scrypted_social_api/model/page.dart';
 import 'package:scrypted_social_api/model/rating_page.dart';
+import 'package:scrypted_social_api/model/user.dart';
 
 class VoteRepository {
   VoteRepository(this.context);
@@ -11,9 +13,11 @@ class VoteRepository {
     int vote,
     int currentUserId,
   ) async {
+    final tmpUser = User()..id = currentUserId;
+    final tmpPage = Page()..id = pageId;
     final RatingPage v = RatingPage()
-      ..user.id = currentUserId
-      ..page.id = pageId
+      ..user = tmpUser
+      ..page = tmpPage
       ..createDate = DateTime.now()
       ..rating = vote;
     final query = Query<RatingPage>(context)..values = v;
