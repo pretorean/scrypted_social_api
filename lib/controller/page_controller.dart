@@ -25,10 +25,9 @@ class PageController extends ResourceController {
     );
 
     List<PageAnswer> tmp2;
-    for (var f in tmp1) {
+    for (Future<PageAnswer> f in tmp1) {
       tmp2.add(await f);
     }
-
     return Response.ok(tmp2);
   }
 
