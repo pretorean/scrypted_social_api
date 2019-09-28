@@ -41,13 +41,13 @@ class PageAnswer extends Serializable {
   @override
   Map<String, dynamic> asMap() => {
         'id': id,
-        'user': user,
+        'user': user.asMap(),
         'title': title,
         'text': text,
         'createDate': createDate,
         'type': type,
         'modified': modified,
-        'rating': rating
+        'rating': rating,
       };
 
   @override
