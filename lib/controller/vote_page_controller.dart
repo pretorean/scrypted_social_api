@@ -8,7 +8,7 @@ class VotePageController extends ResourceController {
   final VoteRepository repository;
 
   @Operation.post("pageId", "vote")
-  Future<Response> createPage(
+  Future<Response> setVote(
     @Bind.path("pageId") int pageId,
     @Bind.path("vote") int vote,
   ) async {
@@ -21,9 +21,6 @@ class VotePageController extends ResourceController {
       vote - 1,
       request.authorization.ownerID,
     );
-    if (count == 0)
-      return Response.notFound();
-    else
-      return Response.ok({"voted": "$count"});
+    return Response.ok({"voted": "$count"});
   }
 }
