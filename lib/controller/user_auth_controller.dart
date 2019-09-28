@@ -1,5 +1,7 @@
 import 'package:aqueduct/aqueduct.dart';
+import 'package:scrypted_social_api/model/page.dart';
 import 'package:scrypted_social_api/model/user.dart';
+import 'package:scrypted_social_api/repository/answer/user_answer.dart';
 
 class UserAuthController extends ResourceController {
   UserAuthController(this.context, this.authServer);
@@ -22,11 +24,17 @@ class UserAuthController extends ResourceController {
       return Response.notFound();
     }
 
+    final countQuery = Query<Page>(context)
+      ..where((p) => p.user.id).equalTo(id);
+    final count = await countQuery.reduce.count();
+
+    final ua = UserAnswer.fromUser(u, count);
+
     if (request.authorization.ownerID != id) {
       // Filter out stuff for non-owner of user
     }
 
-    return Response.ok(u);
+    return Response.ok(ua);
   }
 
   @Operation.put("id")
