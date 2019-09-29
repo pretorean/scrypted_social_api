@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:aqueduct/aqueduct.dart';
 import 'package:scrypted_social_api/model/page.dart';
 import 'package:scrypted_social_api/repository/answer/page_answer.dart';
@@ -33,9 +35,11 @@ class PageController extends ResourceController {
   @Operation.get("pageId")
   Future<Response> getById(@Bind.path("pageId") int pageId) async {
     final product = await repository.getById(pageId);
-    if (product == null)
-      return Response.notFound();
-    else
-      return Response.ok(product);
+    if (product == null) return Response.notFound();
+
+    final map = voteRepository.getPageVotes(pageId);
+    final tmp = PageAnswer.fromPage(product, await map);
+
+    return Response.ok(tmp);
   }
 }
